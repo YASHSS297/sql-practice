@@ -1,0 +1,33 @@
+197. Rising Temperature
+
+Table: Weather
+
++---------------+---------+
+| Column Name   | Type    |
++---------------+---------+
+| id            | int     |
+| recordDate    | date    |
+| temperature   | int     |
++---------------+---------+
+id is the column with unique values for this table.
+There are no different rows with the same recordDate.
+This table contains information about the temperature on a certain day.
+ 
+
+Write a solution to find all dates' id with higher temperatures compared to its previous calendar dates (yesterday).
+
+Return the result table in any order.
+
+Query Ans:-
+ 
+select w1.id from weather w1 join weather w2
+on datediff(w1.recordDate, w2.recordDate) = 1
+where w1.temperature>w2.temperature;
+
+
+Explanation
+We use a SELF JOIN because we need to compare two rows from the same table.
+- w1 represents today's weather.
+- w2 represents yesterday's weather.
+- DATEDIFF(w1.recordDate, w2.recordDate) = 1 checks that the dates are exactly one day apart.
+- w1.temperature > w2.temperature checks whether today's temperature is higher than yesterday's.
